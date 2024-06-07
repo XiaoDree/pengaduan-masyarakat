@@ -19,13 +19,13 @@ class TanggapanController extends CI_Controller {
 	// List all your items
 	public function index()
 	{
-		$data['title'] = 'Data Pengaduan';
+		$data['title'] = 'Semua Pengaduan';
 		$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan()->result_array();
 
 		$this->load->view('_part/backend_head', $data);
 		$this->load->view('_part/backend_sidebar_v');
 		$this->load->view('_part/backend_topbar_v');
-		$this->load->view('admin/tanggapan');
+		$this->load->view('admin/kategori');
 		$this->load->view('_part/backend_footer_v');
 		$this->load->view('_part/backend_foot');
 	}

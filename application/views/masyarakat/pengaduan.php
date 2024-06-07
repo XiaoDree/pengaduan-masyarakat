@@ -11,11 +11,28 @@
   <div class="row">
     <div class="col-lg-6">
       <?= form_open_multipart('Masyarakat/PengaduanController'); ?>
+      <!-- <div class="form-group"> -->
       <div class="form-group">
-        <label for="isi_laporan">Isi Laporan</label>
-        <textarea name="isi_laporan" id="isi_laporan" cols="30" rows="10" class="form-control"></textarea>
-      </div>
+    <label for="jenis_pengaduan">Kategori</label>
+    <div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="jenis_pengaduan" id="insfrastruktur" value="L">
+            <label class="form-check-label" for="insfrastruktur">Insfrastruktur</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="jenis_pengaduan" id="pelayanan" value="P">
+            <label class="form-check-label" for="pelayanan">Pelayanan</label>
+        </div>
+    </div>
+</div>
 
+        <label for="isi_laporan">Isi Laporan</label>
+        <textarea name="isi_laporan" id="isi_laporan" cols="30" rows="10" class="form-control"></textarea><br>
+        <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      </div>
+      
       <div class="form-group">
         <label for="foto">Upload Foto</label>
         <div class="custom-file">
@@ -24,9 +41,7 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
+      
       <?php form_close(); ?>
 
     </div>

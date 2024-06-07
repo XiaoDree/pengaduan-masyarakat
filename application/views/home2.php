@@ -66,7 +66,7 @@
           <li><a class="nav-link scrollto" href="#about">Tentang</a></li>
           <li><a class="nav-link scrollto" href="#services">Prosedur</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
-          <li><a class="nav-link scrollto active" href="<?= base_url('Auth/LoginController') ?>">Login</a></li>
+          <li><a class="nav-link scrollto active" href="<?= base_url('Auth/LogoutController') ?>">Logout</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

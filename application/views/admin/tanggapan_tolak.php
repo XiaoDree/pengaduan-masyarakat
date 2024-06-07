@@ -7,6 +7,19 @@
 	<?= validation_errors('<div class="alert alert-danger alert-dismissible fade show" role="alert">','<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	</div>') ?>
 	<!-- <?= $this->session->flashdata('msg'); ?> -->
+	<!-- Filter Kategori -->
+<div class="row mb-3">
+	<div class="col-md-3">
+		<div class="form-group">
+			<label for="kategori">Kategori:</label>
+			<select class="form-control" id="kategori" name="kategori">
+				<option value="">Semua</option>
+				<option value="infrastruktur">Infrastruktur</option>
+				<option value="pelayanan">Pelayanan</option>
+			</select>
+		</div>
+	</div>
+</div>
 
 	<?php if ( ! empty($data_pengaduan)) : ?>
 

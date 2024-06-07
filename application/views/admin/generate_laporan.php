@@ -29,19 +29,19 @@
 						<td><?= $l['isi_laporan'] ?></td>
 						<td><?= $l['tgl_pengaduan'] ?></td>
 						<td>
-							<?php
-							if ($dp['status'] == '0') :
-								echo '<span class="badge badge-secondary">Sedang di verifikasi</span>';
-							elseif ($dp['status'] == 'proses') :
-								echo '<span class="badge badge-primary">Sedang di proses</span>';
-							elseif ($dp['status'] == 'selesai') :
-								echo '<span class="badge badge-success">Selesai di kerjakan</span>';
-							elseif ($dp['status'] == 'tolak') :
-								echo '<span class="badge badge-danger">Pengaduan ditolak</span>';
-							else :
-								echo '-';
-							endif;
-							?>
+						<?php
+                if ($l['status'] == '0') :
+                    echo '<span class="badge badge-secondary">Sedang di verifikasi</span>';
+                elseif ($l['status'] == 'proses') :
+                    echo '<span class="badge badge-primary">Sedang di proses</span>';
+                elseif ($l['status'] == 'selesai') :
+                    echo '<span class="badge badge-success">Selesai di kerjakan</span>';
+                elseif ($l['status'] == 'tolak') :
+                    echo '<span class="badge badge-danger">Pengaduan ditolak</span>';
+                else :
+                    echo '-';
+                endif;
+                ?>
 						</td>
 
 						</td>

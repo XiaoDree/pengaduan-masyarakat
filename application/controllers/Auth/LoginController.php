@@ -52,7 +52,7 @@ class LoginController extends CI_Controller {
 					Login berhasil!
 					</div>');
 
-				return redirect('homepage');
+				return redirect('homepage2');
 
 			else :
 				// password salah
@@ -106,7 +106,7 @@ class LoginController extends CI_Controller {
 		else :
 		// tidak ada akun yang di temukan
 			$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
-				Username atau Password salah! petugas
+				Username atau Password salah! 
 				</div>');
 		return redirect('Auth/LoginController');
 
