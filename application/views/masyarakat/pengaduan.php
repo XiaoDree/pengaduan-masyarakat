@@ -10,7 +10,7 @@
 
   <div class="row">
     <div class="col-lg-6">
-      <?= form_open_multipart('Masyarakat/PengaduanController'); ?>
+      <?= form_open_multipart('Masyarakat/PengaduanController'); ?> 
       <!-- <div class="form-group"> -->
       <div class="form-group">
     <label for="jenis_pengaduan">Kategori</label>
@@ -60,6 +60,7 @@
         <th scope="col">Isi Laporan</th>
         <th scope="col">Tgl Melapor</th>
         <th scope="col">Foto</th>
+        <th scope="col">Jenis Pengaduan</th>
         <th scope="col">Status</th>
         <th scope="col">Lihat Detail</th>
         <th scope="col">Aksi</th>
@@ -76,6 +77,7 @@
           <td>
             <img width="100" src="<?= base_url() ?>assets/uploads/<?= $dp['foto']; ?>" alt="">
           </td>
+          <td><?= $dp['jenis_pengaduan']; ?></td>
           <td>
               <?php
               if ($dp['status'] == '0') :

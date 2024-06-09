@@ -57,7 +57,7 @@
       <div class="logo">
         <!-- Uncomment below if you prefer to use an text logo -->
         <!-- <h1><a href="index.html">NewBiz</a></h1> -->
-        <a href="homepage"><img src="<?= base_url() ?>/aset/img/lapordesa.png" alt="" class="img-fluid"></a>
+        <a href="homepage"><img src="<?= base_url() ?>/aset/img/logo-full.png" alt="" class="img-fluid"></a>
       </div>
 
       <nav id="navbar" class="navbar">
@@ -79,7 +79,7 @@
     <div class="container" data-aos="fade-up">
 
       <div class="hero-img" data-aos="zoom-out" data-aos-delay="200">
-        <img src="<?= base_url() ?>/aset/img/hero-img.svg" alt="" class="img-fluid">
+        <img src="<?= base_url() ?>/aset/img/" alt="" class="img-fluid">
       </div>
 
       <div class="hero-info" data-aos="zoom-in" data-aos-delay="100">
@@ -126,7 +126,7 @@
           </div>
 
           <div class="col-lg-6 background order-lg-2" data-aos="zoom-in">
-            <img src="<?= base_url() ?>/aset/img/about-img.svg" class="img-fluid" alt="">
+            <img src="<?= base_url() ?>/aset/img/post.jpg" class="img-fluid" alt="">
           </div>
         </div>
 
@@ -205,8 +205,7 @@
 
           <div class="col-lg-6">
             <div class="map mb-4 mb-lg-0">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.20271858623533!2d110.8300275613082!3d-7.548404703438598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a169541c2991d%3A0xb1763d1602f8329f!2sUniversitas%20BSI%20Kampus%20Solo!5e0!3m2!1sid!2sid!4v1715610271249!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-              <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.553987055095!2d112.27465751441615!3d-7.06157429489983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e77f28fabe8b317%3A0xc6908e9489dfc885!2sKantor%20Kecamatan%20Sekaran!5e0!3m2!1sid!2sid!4v1633433803448!5m2!1sid!2sid" frameborder="0" style="border:0; width: 100%; height: 340px;" allowfullscreen></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.9132697413074!2d110.70292387500403!3d-7.692456892324849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a414c3e7e2395%3A0x24cbe91ee118b52a!2sKantor%20Desa%20Sobayan!5e0!3m2!1sid!2sid!4v1717918601379!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
 
@@ -214,7 +213,7 @@
             <div class="row">
               <div class="col-md-5 info">
                 <i class="bi bi-geo-alt"></i>
-                <p>Jl. Letjen Sutoyo No.43, Cengklik, Nusukan, Kec. Banjarsari, Kota Surakarta, Jawa Tengah 57135</p>
+                <p>8P54+259, Jl. Sobayan, Polaharjo, Sobayan, Kec. Pedan, Kabupaten Klaten, Jawa Tengah 57468</p>
               </div>
               <div class="col-md-4 info">
                 <i class="bi bi-envelope"></i>
@@ -230,24 +229,24 @@
               <form action="forms/contact.php" method="post" role="form" class="php-email-form">
                 <div class="row">
                   <div class="form-group col-lg-6">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Nama" required>
                   </div>
                   <div class="form-group col-lg-6 mt-3 mt-lg-0">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
                   </div>
                 </div>
                 <div class="form-group mt-3">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subjek" required>
                 </div>
                 <div class="form-group mt-3">
-                  <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                  <textarea class="form-control" name="message" rows="5" placeholder="Pesan" required></textarea>
                 </div>
                 <div class="my-3">
                   <div class="loading">Loading</div>
                   <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                  <div class="sent-message">Pesanmu sudah terkirim. Terima kasih!</div>
                 </div>
-                <div class="text-center"><button type="submit" title="Send Message">Send Message</button></div>
+                <div class="text-center"><button type="submit" title="Kirim Pesan">Kirim Pesan</button></div>
               </form>
             </div>
           </div>
@@ -286,7 +285,7 @@
           <div class="col-lg-3 col-md-6 footer-contact">
             <h4>Kontak Kami</h4>
             <p>
-            Jl. Letjen Sutoyo No.43, Cengklik, Nusukan, Kec. Banjarsari, Kota Surakarta, Jawa Tengah 57135
+            8P54+259, Jl. Sobayan, Polaharjo, Sobayan, Kec. Pedan, Kabupaten Klaten, Jawa Tengah 57468
               <br><strong>Phone:</strong> +62 858-4351-0263<br>
               <strong>Email:</strong> info@lapordesa.com<br>
             </p>
@@ -306,9 +305,9 @@
     </div>
 
     <div class="container">
-      <div class="copyright">
+      <!-- <div class="copyright">
         &copy; Copyright <strong>LAPOR DESA</strong>. All Rights Reserved
-      </div>
+      </div> -->
       <div class="credits">
         <!--
         All the links in the footer should remain intact.
