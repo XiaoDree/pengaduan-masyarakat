@@ -10,6 +10,10 @@ class Masyarakat_m extends CI_Model {
 	{
 		return $this->db->insert($this->table, $data);;
 	}
+	public function get()
+	{
+		return $this->db->get('telp')->result_array();
+	}
 }
 
 /* End of file Masyarakat_m.php */

@@ -83,6 +83,8 @@
       </div>
 
       <div class="hero-info" data-aos="zoom-in" data-aos-delay="100">
+        <br>
+        <br>
         <h2>LAYANAN PENGADUAN <br>ONLINE MASYARAKAT </h2>
         <div>
           <a href="Masyarakat/PengaduanController" class="btn-services scrollto">Tulis Pengaduan Anda</a>

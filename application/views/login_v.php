@@ -31,6 +31,9 @@
                 </form>
                 <hr>
                 <div class="text-center">
+                  <a class="small" href="<?= base_url('Auth/LupaPasswordController') ?>">Lupa Password</a>
+                <hr>
+                <div class="text-center">
                   <a class="small" href="<?= base_url('Auth/RegisterController') ?>">Register?</a>
                 </div>
               </div>

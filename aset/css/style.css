@@ -290,7 +290,7 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   background: url("../img/desa.jpg") center bottom no-repeat;
   background-size: 100%;
-  padding: 200px 0 350px 0;
+  padding: 200px 0 280px 0;
 }
 @media (max-width: 991px) {
   #hero {
@@ -332,6 +332,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 #hero .hero-info h2 {
   color: #ffffff;
+  text-shadow: -2px -1px 0 rgb(0, 0, 0), 2px -1px 0 rgb(0, 0, 0), 2px 1px 0 rgb(0, 0, 0),
+    2px 1px 0 rgb(0, 0, 0);
   margin-bottom: 0px;
   font-size: 48px;
   font-weight: 700;
