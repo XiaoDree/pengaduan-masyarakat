@@ -1,40 +1,47 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PengaduanController extends CI_Controller {
+use function PHPSTORM_META\type;
+
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class PengaduanController extends CI_Controller
+{
 
 	public function __construct()
 	{
 		parent::__construct();
 		//Load Dependencies
 		is_logged_in();
-		if ( ! empty($this->session->userdata('level'))) :
+		if (!empty($this->session->userdata('level'))) :
 			redirect('Auth/BlockedController');
 		endif;
 		$this->load->model('Pengaduan_m');
+		$this->load->model('Kategori_m');
 	}
 
 	// List all your items
 	public function index()
 	{
 		$data['title'] = 'Pengaduan';
-		$masyarakat = $this->db->get_where('masyarakat',['username' => $this->session->userdata('username')])->row_array();
+		$masyarakat = $this->db->get_where('masyarakat', ['username' => $this->session->userdata('username')])->row_array();
 		$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_masyarakat_nik($masyarakat['nik'])->result_array();
-		
-		$this->form_validation->set_rules('isi_laporan','Isi Laporan Pengaduan','trim|required');
-		$this->form_validation->set_rules('foto','Foto Pengaduan','trim');
+		$data['data_kategori'] = $this->Kategori_m->get_categories();
+		$data['cek'] = json_encode($data['data_kategori']);
+		$this->form_validation->set_rules('isi_laporan', 'Isi Laporan Pengaduan', 'trim|required');
+		$this->form_validation->set_rules('foto', 'Foto Pengaduan', 'trim');
+
 
 		if ($this->form_validation->run() == FALSE) :
 			$this->load->view('_part/backend_head', $data);
 			$this->load->view('_part/backend_sidebar_v');
 			$this->load->view('_part/backend_topbar_v');
-			$this->load->view('masyarakat/pengaduan');
+			$this->load->view('masyarakat/pengaduan', $data);
 			$this->load->view('_part/backend_footer_v');
 			$this->load->view('_part/backend_foot');
 		else :
 			$upload_foto = $this->upload_foto('foto'); // parameter nama foto
 			if ($upload_foto == FALSE) :
-				$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
+				$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
 					Upload foto pengaduan gagal, hanya png,jpg dan jpeg yang dapat di upload!
 					</div>');
 
@@ -44,21 +51,22 @@ class PengaduanController extends CI_Controller {
 				$params = [
 					'tgl_pengaduan'  	=> date('Y-m-d'),
 					'nik'				=> $masyarakat['nik'],
-					'isi_laporan'		=> htmlspecialchars($this->input->post('isi_laporan',true)),
+					'isi_laporan'		=> htmlspecialchars($this->input->post('isi_laporan', true)),
 					'foto'				=> $upload_foto,
 					'status'			=> '0',
+					'jenis_pengaduan'	=> $this->input->post('kategori')
 				];
 
 				$resp = $this->Pengaduan_m->create($params);
 
 				if ($resp) :
-					$this->session->set_flashdata('msg','<div class="alert alert-primary" role="alert">
+					$this->session->set_flashdata('msg', '<div class="alert alert-primary" role="alert">
 						Laporan berhasil dibuat
 						</div>');
 
 					redirect('Masyarakat/PengaduanController');
 				else :
-					$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
+					$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
 						Laporan gagal dibuat!
 						</div>');
 
@@ -72,9 +80,9 @@ class PengaduanController extends CI_Controller {
 	public function pengaduan_detail($id)
 	{
 
-		$cek_data = $this->db->get_where('pengaduan',['id_pengaduan' => htmlspecialchars($id)])->row_array();
+		$cek_data = $this->db->get_where('pengaduan', ['id_pengaduan' => htmlspecialchars($id)])->row_array();
 
-		if ( ! empty($cek_data)) :
+		if (!empty($cek_data)) :
 
 			$data['title'] = 'Detail Pengaduan';
 
@@ -83,56 +91,11 @@ class PengaduanController extends CI_Controller {
 				$this->load->view('_part/backend_head', $data);
 				$this->load->view('_part/backend_sidebar_v');
 				$this->load->view('_part/backend_topbar_v');
-				$this->load->view('masyarakat/pengaduan_detail');
+				$this->load->view('masyarakat/pengaduan_detail', $data);
 				$this->load->view('_part/backend_footer_v');
 				$this->load->view('_part/backend_foot');
 			else :
-				$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
-					Pengaduan sedang di proses!
-					</div>');
-
-				redirect('Masyarakat/PengaduanController');			
-			endif;
-			
-		else :
-			$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
-				data tidak ada
-				</div>');
-
-			redirect('Masyarakat/PengaduanController');			
-		endif;
-	}
-
-	public function pengaduan_batal($id)
-	{
-		$cek_data = $this->db->get_where('pengaduan',['id_pengaduan' => htmlspecialchars($id)])->row_array();
-
-		if ( ! empty($cek_data)) :
-
-			if ($cek_data['status'] == '0') :
-
-				$resp = $this->db->delete('pengaduan',['id_pengaduan' => $id]);
-
-				// hapus file
-				$path = './assets/uploads/'.$cek_data['foto'];
-				unlink($path);
-
-				if ($resp) :
-					$this->session->set_flashdata('msg','<div class="alert alert-primary" role="alert">
-						Hapus pengaduan berhasil
-						</div>');
-
-					redirect('Masyarakat/PengaduanController');
-				else :
-					$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
-						Hapus pengaduan gagal!
-						</div>');
-
-					redirect('Masyarakat/PengaduanController');
-				endif;
-
-			else :
-				$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
+				$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
 					Pengaduan sedang di proses!
 					</div>');
 
@@ -140,28 +103,73 @@ class PengaduanController extends CI_Controller {
 			endif;
 
 		else :
-			$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
 				data tidak ada
 				</div>');
 
-			redirect('Masyarakat/PengaduanController');				
+			redirect('Masyarakat/PengaduanController');
+		endif;
+	}
+
+	public function pengaduan_batal($id)
+	{
+		$cek_data = $this->db->get_where('pengaduan', ['id_pengaduan' => htmlspecialchars($id)])->row_array();
+
+		if (!empty($cek_data)) :
+
+			if ($cek_data['status'] == '0') :
+
+				$resp = $this->db->delete('pengaduan', ['id_pengaduan' => $id]);
+
+				// hapus file
+				$path = './assets/uploads/' . $cek_data['foto'];
+				unlink($path);
+
+				if ($resp) :
+					$this->session->set_flashdata('msg', '<div class="alert alert-primary" role="alert">
+						Hapus pengaduan berhasil
+						</div>');
+
+					redirect('Masyarakat/PengaduanController');
+				else :
+					$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
+						Hapus pengaduan gagal!
+						</div>');
+
+					redirect('Masyarakat/PengaduanController');
+				endif;
+
+			else :
+				$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
+					Pengaduan sedang di proses!
+					</div>');
+
+				redirect('Masyarakat/PengaduanController');
+			endif;
+
+		else :
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
+				data tidak ada
+				</div>');
+
+			redirect('Masyarakat/PengaduanController');
 		endif;
 	}
 
 	public function edit($id)
 	{
-		$cek_data = $this->db->get_where('pengaduan',['id_pengaduan' => htmlspecialchars($id)])->row_array();
+		$cek_data = $this->db->get_where('pengaduan', ['id_pengaduan' => htmlspecialchars($id)])->row_array();
 
-		if ( ! empty($cek_data)) :
+		if (!empty($cek_data)) :
 
 			if ($cek_data['status'] == '0') :
 
 				$data['title'] = 'Edit Pengaduan';
 				$data['pengaduan'] = $cek_data;
 
-				$this->form_validation->set_rules('isi_laporan','Isi Laporan Pengaduan','trim|required');
-				$this->form_validation->set_rules('foto','Foto Pengaduan','trim');
-				
+				$this->form_validation->set_rules('isi_laporan', 'Isi Laporan Pengaduan', 'trim|required');
+				$this->form_validation->set_rules('foto', 'Foto Pengaduan', 'trim');
+
 				if ($this->form_validation->run() == FALSE) :
 					$this->load->view('_part/backend_head', $data);
 					$this->load->view('_part/backend_sidebar_v');
@@ -174,7 +182,7 @@ class PengaduanController extends CI_Controller {
 					$upload_foto = $this->upload_foto('foto'); // parameter nama foto
 
 					if ($upload_foto == FALSE) :
-						$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
+						$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
 							Upload foto pengaduan gagal, hanya png,jpg dan jpeg yang dapat di upload!
 							</div>');
 
@@ -182,24 +190,24 @@ class PengaduanController extends CI_Controller {
 					else :
 
 						// hapus file
-						$path = './assets/uploads/'.$cek_data['foto'];
+						$path = './assets/uploads/' . $cek_data['foto'];
 						unlink($path);
 
 						$params = [
-							'isi_laporan'		=> htmlspecialchars($this->input->post('isi_laporan',true)),
+							'isi_laporan'		=> htmlspecialchars($this->input->post('isi_laporan', true)),
 							'foto'				=> $upload_foto,
 						];
 
-						$resp = $this->db->update('pengaduan',$params,['id_pengaduan' => $id]);;
+						$resp = $this->db->update('pengaduan', $params, ['id_pengaduan' => $id]);;
 
 						if ($resp) :
-							$this->session->set_flashdata('msg','<div class="alert alert-primary" role="alert">
+							$this->session->set_flashdata('msg', '<div class="alert alert-primary" role="alert">
 								Laporan berhasil dibuat
 								</div>');
 
 							redirect('Masyarakat/PengaduanController');
 						else :
-							$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
+							$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
 								Laporan gagal dibuat!
 								</div>');
 
@@ -211,7 +219,7 @@ class PengaduanController extends CI_Controller {
 				endif;
 
 			else :
-				$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
+				$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
 					Pengaduan sedang di proses!
 					</div>');
 
@@ -219,11 +227,11 @@ class PengaduanController extends CI_Controller {
 			endif;
 
 		else :
-			$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
 				data tidak ada
 				</div>');
 
-			redirect('Masyarakat/PengaduanController');				
+			redirect('Masyarakat/PengaduanController');
 		endif;
 	}
 
@@ -239,7 +247,7 @@ class PengaduanController extends CI_Controller {
 
 		$this->load->library('upload', $config);
 
-		if ( ! $this->upload->do_upload($foto)) :
+		if (!$this->upload->do_upload($foto)) :
 			return FALSE;
 		else :
 			return $this->upload->data('file_name');

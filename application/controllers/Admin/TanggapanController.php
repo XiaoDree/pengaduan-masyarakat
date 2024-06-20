@@ -1,18 +1,20 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class TanggapanController extends CI_Controller {
+class TanggapanController extends CI_Controller
+{
 
 	public function __construct()
 	{
 		parent::__construct();
 		//Load Dependencies
 		is_logged_in();
-		if ( ! $this->session->userdata('level')) :
+		if (!$this->session->userdata('level')) :
 			redirect('Auth/BlockedController');
 		endif;
 		$this->load->model('Tanggapan_m');
 		$this->load->model('Pengaduan_m');
+		$this->load->model('Kategori_m');
 		$this->load->model('Petugas_m');
 	}
 
@@ -21,22 +23,28 @@ class TanggapanController extends CI_Controller {
 	{
 		$data['title'] = 'Data Pengaduan';
 		$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan()->result_array();
+		$data['kategori'] = $this->Kategori_m->get_categories();
+		$data['data_filter'] = $this->input->get('jp');
+
+		if ($this->input->get('jp') && $this->input->get('jp') !== "semua") {
+			$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_by_kategori($this->input->get('jp'))->result_array();
+		}
 
 		$this->load->view('_part/backend_head', $data);
 		$this->load->view('_part/backend_sidebar_v');
 		$this->load->view('_part/backend_topbar_v');
-		$this->load->view('admin/tanggapan');
+		$this->load->view('admin/tanggapan', $data);
 		$this->load->view('_part/backend_footer_v');
 		$this->load->view('_part/backend_foot');
 	}
 
 	public function tanggapan_detail()
 	{
-		$id = htmlspecialchars($this->input->post('id',true)); // id pengaduan
+		$id = htmlspecialchars($this->input->post('id', true)); // id pengaduan
 
-		$cek_data = $this->db->get_where('pengaduan',['id_pengaduan' => $id])->row_array();
+		$cek_data = $this->db->get_where('pengaduan', ['id_pengaduan' => $id])->row_array();
 
-		if ( ! empty($cek_data)) :
+		if (!empty($cek_data)) :
 
 			$data['title'] = 'Beri Tanggapan';
 			$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_masyarakat_id(htmlspecialchars($id))->row_array();
@@ -47,13 +55,13 @@ class TanggapanController extends CI_Controller {
 			$this->load->view('admin/tanggapan_detail');
 			$this->load->view('_part/backend_footer_v');
 			$this->load->view('_part/backend_foot');
-			
+
 		else :
-			$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
 				data tidak ada
 				</div>');
 
-			redirect('Admin/TanggapanController');			
+			redirect('Admin/TanggapanController');
 		endif;
 	}
 
@@ -99,10 +107,10 @@ class TanggapanController extends CI_Controller {
 
 	public function tanggapan_pengaduan_selesai()
 	{
-		$id_pengaduan = htmlspecialchars($this->input->post('id',true));
-		$cek_data = $this->db->get_where('pengaduan',['id_pengaduan' => $id_pengaduan])->row_array();
-		
-		if ( ! empty($cek_data)) :
+		$id_pengaduan = htmlspecialchars($this->input->post('id', true));
+		$cek_data = $this->db->get_where('pengaduan', ['id_pengaduan' => $id_pengaduan])->row_array();
+
+		if (!empty($cek_data)) :
 
 			$this->form_validation->set_rules('id', 'id', 'trim|required');
 
@@ -124,40 +132,40 @@ class TanggapanController extends CI_Controller {
 					'status' => 'selesai',
 				];
 
-				$update_status_pengaduan = $this->db->update('pengaduan',$params,['id_pengaduan' =>  $id_pengaduan]);
+				$update_status_pengaduan = $this->db->update('pengaduan', $params, ['id_pengaduan' =>  $id_pengaduan]);
 
 				if ($update_status_pengaduan) :
 
-					$this->session->set_flashdata('msg','<div class="alert alert-primary" role="alert">
+					$this->session->set_flashdata('msg', '<div class="alert alert-primary" role="alert">
 						Pengaduan berhasil diselesaikan!
 						</div>');
 
-					redirect('Admin/TanggapanController/tanggapan_proses');	
+					redirect('Admin/TanggapanController/tanggapan_proses');
 
 				else :
-					$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
+					$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
 						Pengaduan berhasil diselesaikan!
 						</div>');
 
-					redirect('Admin/TanggapanController/tanggapan_proses');	
+					redirect('Admin/TanggapanController/tanggapan_proses');
 				endif;
 
 			endif;
 		else :
-			$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
 				data tidak ada
 				</div>');
 
-			redirect('Admin/TanggapanController/tanggapan_proses');			
+			redirect('Admin/TanggapanController/tanggapan_proses');
 		endif;
 	}
 
 	public function tambah_tanggapan()
 	{
-		$id_pengaduan = htmlspecialchars($this->input->post('id',true));
-		$cek_data = $this->db->get_where('pengaduan',['id_pengaduan' => $id_pengaduan])->row_array();
+		$id_pengaduan = htmlspecialchars($this->input->post('id', true));
+		$cek_data = $this->db->get_where('pengaduan', ['id_pengaduan' => $id_pengaduan])->row_array();
 
-		if ( ! empty($cek_data)) :
+		if (!empty($cek_data)) :
 
 			$this->form_validation->set_rules('id', 'id', 'trim|required');
 			$this->form_validation->set_rules('status', 'Status Pengaduan', 'trim|required');
@@ -177,35 +185,35 @@ class TanggapanController extends CI_Controller {
 
 			else :
 
-				$petugas = $this->db->get_where('petugas',['username' => $this->session->userdata('username')])->row_array();
+				$petugas = $this->db->get_where('petugas', ['username' => $this->session->userdata('username')])->row_array();
 
 				$params = [
 					'id_pengaduan'		=> $id_pengaduan,
 					'tgl_tanggapan'		=> date('Y-m-d'),
-					'tanggapan'			=> htmlspecialchars($this->input->post('tanggapan',true)),
+					'tanggapan'			=> htmlspecialchars($this->input->post('tanggapan', true)),
 					'id_petugas'		=> $petugas['id_petugas'],
 				];
 
-				$menanggapi = $this->db->insert('tanggapan',$params);
+				$menanggapi = $this->db->insert('tanggapan', $params);
 
 				if ($menanggapi) :
 
 					$params = [
-						'status' => $this->input->post('status',true),
+						'status' => $this->input->post('status', true),
 					];
 
-					$update_status_pengaduan = $this->db->update('pengaduan',$params,['id_pengaduan' =>  $id_pengaduan]);
+					$update_status_pengaduan = $this->db->update('pengaduan', $params, ['id_pengaduan' =>  $id_pengaduan]);
 
 					if ($update_status_pengaduan) :
 
-						$this->session->set_flashdata('msg','<div class="alert alert-primary" role="alert">
+						$this->session->set_flashdata('msg', '<div class="alert alert-primary" role="alert">
 							Menanggapi berhasil
 							</div>');
 
 						redirect('Admin/TanggapanController');
 
 					else :
-						$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
+						$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
 							Gagal Update Pengaduan
 							</div>');
 
@@ -214,7 +222,7 @@ class TanggapanController extends CI_Controller {
 
 
 				else :
-					$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
+					$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
 						Menanggapi gagal!
 						</div>');
 
@@ -226,11 +234,11 @@ class TanggapanController extends CI_Controller {
 
 
 		else :
-			$this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert">
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">
 				data tidak ada
 				</div>');
 
-			redirect('Admin/TanggapanController');	
+			redirect('Admin/TanggapanController');
 		endif;
 	}
 }

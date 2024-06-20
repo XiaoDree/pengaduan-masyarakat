@@ -1,8 +1,11 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Kategori_m extends CI_Model {
-    public function get_all() {
-        return $this->db->get('kategori')->result();
+class Kategori_m extends CI_Model
+{
+    private $table = 'kategori';
+    public function get_categories()
+    {
+        return $this->db->get($this->table)->result();
     }
 }

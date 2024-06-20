@@ -207,7 +207,7 @@
 
           <div class="col-lg-6">
             <div class="map mb-4 mb-lg-0">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.9132697413074!2d110.70292387500403!3d-7.692456892324849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a414c3e7e2395%3A0x24cbe91ee118b52a!2sKantor%20Desa%20Sobayan!5e0!3m2!1sid!2sid!4v1717918601379!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.9132697413074!2d110.70292387500403!3d-7.692456892324849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a414c3e7e2395%3A0x24cbe91ee118b52a!2sKantor%20Desa%20Sobayan!5e0!3m2!1sid!2sid!4v1717918601379!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
 
@@ -278,16 +278,17 @@
           <div class="col-lg-4 col-md-6 footer-links">
             <h4>Berita Terkini</h4>
             <ul>
-              <li><a href="https://soloraya.solopos.com/skatepark-di-bawah-flyover-purwosari-tak-sekadar-wahana-bermain-skateboard-1919954">Skatepark di Bawah Flyover Purwosari tak Sekadar Wahana Bermain Skateboard</a></li>
-              <li><a href="https://travel.kompas.com/read/2024/05/11/170500027/9-wisata-malam-di-solo-kunjungi-saat-mampir">9 Wisata Malam di Solo, Kunjungi Saat Mampir</a></li>
-              <li><a href="https://travel.kompas.com/read/2024/03/16/130100527/wujud-taman-balekambang-di-kota-solo-usai-revitalisasi-makin-indah">Wujud Taman Balekambang di Kota Solo usai Revitalisasi, Makin Indah</a></li>
+              <li><a href="https://klatenkab.go.id/dekatkan-layanan-pemkab-klaten-gelar-sambang-warga-di-kelurahan-mojayan/">Dekatkan Layanan, Pemkab Klaten Gelar Sambang Warga di Kelurahan Mojayan</a></li>
+              <li><a href="https://beritaklaten.com/memuaskan-layanan-publik-kantor-kecamatan-karangnongko-dapat-nilai-83-54/r">Memuaskan, Layanan Publik Kantor Kecamatan Karangnongko Dapat Nilai 83.54</a></li>
+              <li><a href="https://soloraya.solopos.com/gerebek-ruko-di-pedan-klaten-polisi-sita-566-botol-isi-miras-berbagai-merek-1931280">Gerebek Ruko di Pedan Klaten, Polisi Sita 566 Botol Isi Miras Berbagai Merek</a></li>
             </ul>
+
           </div>
 
           <div class="col-lg-3 col-md-6 footer-contact">
             <h4>Kontak Kami</h4>
             <p>
-            8P54+259, Jl. Sobayan, Polaharjo, Sobayan, Kec. Pedan, Kabupaten Klaten, Jawa Tengah 57468
+              8P54+259, Jl. Sobayan, Polaharjo, Sobayan, Kec. Pedan, Kabupaten Klaten, Jawa Tengah 57468
               <br><strong>Phone:</strong> +62 858-4351-0263<br>
               <strong>Email:</strong> info@lapordesa.com<br>
             </p>
