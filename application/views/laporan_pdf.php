@@ -23,115 +23,117 @@
 
 <body id="page-top">
 
-<style type="text/css">
-.table-data{
- width: 100%;
- border-collapse: collapse;
- }
- .table-data tr th,
- .table-data tr td{
- border:1px solid black;
- font-size: 11pt;
- font-family:Verdana;
- padding: 10px 10px 10px 10px;
- }
- .table-data th{
- background-color:grey;
- }
- h1{
- font-family:Verdana;
- }
-</style>
+  <style type="text/css">
+    .table-data {
+      width: 100%;
+      border-collapse: collapse;
+    }
 
-<!-- Page Wrapper -->
-<div id="wrapper">
+    .table-data tr th,
+    .table-data tr td {
+      border: 1px solid black;
+      font-size: 11pt;
+      font-family: Verdana;
+      padding: 10px 10px 10px 10px;
+    }
 
-  <!-- End of Topbar -->
+    .table-data th {
+      background-color: grey;
+    }
 
-  <!-- Begin Page Content -->
-  <div class="container-fluid">
+    h1 {
+      font-family: Verdana;
+    }
+  </style>
 
-    <!-- Page Heading -->
-    <h1 class="h4 text-dark">Laporan Pengaduan Masyarakat</h1>
+  <!-- Page Wrapper -->
+  <div id="wrapper">
 
-    <table class="table-data">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">No</th>
-          <th scope="col">Nama</th>
-          <th scope="col">Nik</th>
-          <th scope="col">Laporan</th>
-          <th scope="col">Tgl Pengaduan</th>
-          <th scope="col">Status</th>
-          <th scope="col">Tanggapan</th>
-          <th scope="col">Tgl Tanggapan</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php $no = 1; ?>
-        <?php foreach($laporan as $l) : ?>
+    <!-- End of Topbar -->
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+      <!-- Page Heading -->
+      <h1 class="h4 text-dark">Laporan Pengaduan Masyarakat</h1>
+
+      <table class="table-data">
+        <thead class="thead-dark">
           <tr>
-            <td scope="row"><?= $no++; ?></td>
-            <td><?= $l['nama'] ?></td>
-            <td><?= $l['nik'] ?></td>
-            <td><?= $l['isi_laporan'] ?></td>
-            <td><?= $l['tgl_pengaduan'] ?></td>
-            <td>
-              <?php
-              if ($l['status'] == '0') :
-                echo '<span class="badge badge-secondary">Sedang di verifikasi</span>';
-              elseif ($l['status'] == 'proses') :
-                echo '<span class="badge badge-primary">Sedang di proses</span>';
-              elseif ($l['status'] == 'selesai') :
-                echo '<span class="badge badge-success">Selesai di kerjakan</span>';
-              elseif ($l['status'] == 'tolak') :
-                echo '<span class="badge badge-danger">Pengaduan di tolak</span>';
-              else :
-                echo '-';
-              endif;
-              ?>
-            </td>
-            <td><?= $l['tanggapan'] == null ? '-' : $l['tanggapan']; ?></td>
-            <td><?= $l['tgl_tanggapan'] == null ? '-' : $l['tgl_tanggapan']; ?></td>
+            <th scope="col">No</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Kategori</th>
+            <th scope="col">Laporan</th>
+            <th scope="col">Tgl Pengaduan</th>
+            <th scope="col">Status</th>
+            <th scope="col">Tanggapan</th>
+            <th scope="col">Tgl Tanggapan</th>
           </tr>
-        <?php endforeach; ?>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <?php $no = 1; ?>
+          <?php foreach ($laporan as $l) : ?>
+            <tr>
+              <td scope="row"><?= $no++; ?></td>
+              <td><?= $l['nama'] ?></td>
+              <td><?= $l['jenis_pengaduan'] ?></td>
+              <td><?= $l['isi_laporan'] ?></td>
+              <td><?= $l['tgl_pengaduan'] ?></td>
+              <td>
+                <?php
+                if ($l['status'] == '0') :
+                  echo '<span class="badge badge-secondary">Sedang di verifikasi</span>';
+                elseif ($l['status'] == 'proses') :
+                  echo '<span class="badge badge-primary">Sedang di proses</span>';
+                elseif ($l['status'] == 'selesai') :
+                  echo '<span class="badge badge-success">Selesai di kerjakan</span>';
+                elseif ($l['status'] == 'tolak') :
+                  echo '<span class="badge badge-danger">Pengaduan di tolak</span>';
+                else :
+                  echo '-';
+                endif;
+                ?>
+              </td>
+              <td><?= $l['tanggapan'] == null ? '-' : $l['tanggapan']; ?></td>
+              <td><?= $l['tgl_tanggapan'] == null ? '-' : $l['tgl_tanggapan']; ?></td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+
+    </div>
+    <!-- /.container-fluid -->
 
   </div>
-  <!-- /.container-fluid -->
+  <!-- End of Main Content -->
 
-</div>
-<!-- End of Main Content -->
-
-<!-- Footer -->
-<!-- <footer class="sticky-footer bg-white">
+  <!-- Footer -->
+  <!-- <footer class="sticky-footer bg-white">
   <div class="container my-auto">
     <div class="copyright text-center my-auto">
       <span><center>Copyright &copy; Kelompok 4</center></span>
     </div>
   </div>
 </footer> -->
-<!-- End of Footer -->
+  <!-- End of Footer -->
 
-</div>
-<!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Content Wrapper -->
 
-</div>
-<!-- End of Page Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
 
 
-<script src="<?= base_url() ?>assets/backend/vendor/jquery/jquery.min.js"></script>
-<script src="<?= base_url() ?>assets/backend/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?= base_url() ?>assets/backend/vendor/jquery/jquery.min.js"></script>
+  <script src="<?= base_url() ?>assets/backend/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="<?= base_url() ?>assets/backend/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="<?= base_url() ?>assets/backend/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="<?= base_url() ?>assets/backend/js/sb-admin-2.min.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="<?= base_url() ?>assets/backend/js/sb-admin-2.min.js"></script>
 
 
 </body>
 
 </html>
-

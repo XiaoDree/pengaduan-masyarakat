@@ -27,7 +27,7 @@ class Pengaduan_m extends CI_Model
 		$this->db->from($this->table);
 		$this->db->join('masyarakat', 'masyarakat.nik = pengaduan.nik', 'inner');
 		$this->db->where('jenis_pengaduan', $kategori);
-		$this->db->where('status', '0');
+		$this->db->where('status', 'proses');
 		return $this->db->get();
 	}
 

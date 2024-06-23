@@ -4,7 +4,7 @@
   <div class="row justify-content-center">
 
     <div class="col-lg-6">
-    
+
       <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
           <!-- Nested Row within Card Body -->
@@ -15,23 +15,23 @@
                   <h1 class="h4 text-gray-900 mb-4">Login</h1>
                 </div>
 
-                <?= validation_errors('<div class="alert alert-danger alert-dismissible fade show" role="alert">','<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <?= validation_errors('<div class="alert alert-danger alert-dismissible fade show" role="alert">', '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>') ?>
 
                 <!-- <?= $this->session->flashdata('msg'); ?> -->
-                
+
                 <?= form_open('Auth/LoginController', 'class="user"'); ?>
-                  <div class="form-group">
-                    <input type="text" class="form-control form-control-user" id="username" name="username" placeholder="Username" autofocus value="<?= set_value('username') ?>">
-                  </div>
-                  <div class="form-group">
-                    <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
-                  </div>
-                  <button type="submit" class="btn btn-dark btn-user btn-block">Login</button>
+                <div class="form-group">
+                  <input type="text" class="form-control form-control-user" id="username" name="username" placeholder="Username" autofocus value="<?= set_value('username') ?>">
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-dark btn-user btn-block">Login</button>
                 </form>
-                <hr>
+                <!-- <hr>
                 <div class="text-center">
-                  <a class="small" href="<?= base_url('Auth/LupaPasswordController') ?>">Lupa Password</a>
+                  <a class="small" href="<?= base_url('Auth/LupaPasswordController') ?>">Lupa Password</a> -->
                 <hr>
                 <div class="text-center">
                   <a class="small" href="<?= base_url('Auth/RegisterController') ?>">Register?</a>

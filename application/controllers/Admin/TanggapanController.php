@@ -69,11 +69,17 @@ class TanggapanController extends CI_Controller
 	{
 		$data['title'] = 'Pengaduan Proses';
 		$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_masyarakat_proses()->result_array();
+		$data['kategori'] = $this->Kategori_m->get_categories();
+		$data['data_filter'] = $this->input->get('jp');
+
+		if ($this->input->get('jp') && $this->input->get('jp') !== "semua") {
+			$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_by_kategori($this->input->get('jp'))->result_array();
+		}
 
 		$this->load->view('_part/backend_head', $data);
 		$this->load->view('_part/backend_sidebar_v');
 		$this->load->view('_part/backend_topbar_v');
-		$this->load->view('admin/tanggapan_proses');
+		$this->load->view('admin/tanggapan_proses', $data);
 		$this->load->view('_part/backend_footer_v');
 		$this->load->view('_part/backend_foot');
 	}
@@ -82,11 +88,17 @@ class TanggapanController extends CI_Controller
 	{
 		$data['title'] = 'Pengaduan Selesai Dikerjakan';
 		$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_masyarakat_selesai()->result_array();
+		$data['kategori'] = $this->Kategori_m->get_categories();
+		$data['data_filter'] = $this->input->get('jp');
+
+		if ($this->input->get('jp') && $this->input->get('jp') !== "semua") {
+			$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_by_kategori($this->input->get('jp'))->result_array();
+		}
 
 		$this->load->view('_part/backend_head', $data);
 		$this->load->view('_part/backend_sidebar_v');
 		$this->load->view('_part/backend_topbar_v');
-		$this->load->view('admin/tanggapan_selesai');
+		$this->load->view('admin/tanggapan_selesai', $data);
 		$this->load->view('_part/backend_footer_v');
 		$this->load->view('_part/backend_foot');
 	}
@@ -95,11 +107,17 @@ class TanggapanController extends CI_Controller
 	{
 		$data['title'] = 'Pengaduan Ditolak';
 		$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_masyarakat_tolak()->result_array();
+		$data['kategori'] = $this->Kategori_m->get_categories();
+		$data['data_filter'] = $this->input->get('jp');
+
+		if ($this->input->get('jp') && $this->input->get('jp') !== "semua") {
+			$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_by_kategori($this->input->get('jp'))->result_array();
+		}
 
 		$this->load->view('_part/backend_head', $data);
 		$this->load->view('_part/backend_sidebar_v');
 		$this->load->view('_part/backend_topbar_v');
-		$this->load->view('admin/tanggapan_tolak');
+		$this->load->view('admin/tanggapan_tolak', $data);
 		$this->load->view('_part/backend_footer_v');
 		$this->load->view('_part/backend_foot');
 	}
@@ -118,11 +136,17 @@ class TanggapanController extends CI_Controller
 
 				$data['title'] = 'Pengaduan Proses';
 				$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_masyarakat_proses()->result_array();
+				$data['kategori'] = $this->Kategori_m->get_categories();
+				$data['data_filter'] = $this->input->get('jp');
+
+				if ($this->input->get('jp') && $this->input->get('jp') !== "semua") {
+					$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_by_kategori($this->input->get('jp'))->result_array();
+				}
 
 				$this->load->view('_part/backend_head', $data);
 				$this->load->view('_part/backend_sidebar_v');
 				$this->load->view('_part/backend_topbar_v');
-				$this->load->view('admin/tanggapan_proses');
+				$this->load->view('admin/tanggapan_proses', $data);
 				$this->load->view('_part/backend_footer_v');
 				$this->load->view('_part/backend_foot');
 
