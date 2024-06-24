@@ -27,6 +27,16 @@ class Pengaduan_m extends CI_Model
 		$this->db->from($this->table);
 		$this->db->join('masyarakat', 'masyarakat.nik = pengaduan.nik', 'inner');
 		$this->db->where('jenis_pengaduan', $kategori);
+		$this->db->where('status', '0');
+		return $this->db->get();
+	}
+
+	public function data_pengaduan_by_kategori1($kategori)
+	{
+		$this->db->select('pengaduan.*,masyarakat.nama,masyarakat.telp');
+		$this->db->from($this->table);
+		$this->db->join('masyarakat', 'masyarakat.nik = pengaduan.nik', 'inner');
+		$this->db->where('jenis_pengaduan', $kategori);
 		$this->db->where('status', 'proses');
 		return $this->db->get();
 	}
@@ -49,12 +59,17 @@ class Pengaduan_m extends CI_Model
 		return $this->db->get();
 	}
 
-	public function data_pengaduan_masyarakat_selesai()
+	public function data_pengaduan_masyarakat_selesai($kategori = null)
 	{
 		$this->db->select('pengaduan.*,masyarakat.nama,masyarakat.telp');
 		$this->db->from($this->table);
 		$this->db->join('masyarakat', 'masyarakat.nik = pengaduan.nik', 'inner');
 		$this->db->where('status', 'selesai');
+
+		if ($kategori !== null) {
+			$this->db->where('jenis_pengaduan', $kategori);
+		}
+
 		return $this->db->get();
 	}
 
@@ -81,13 +96,18 @@ class Pengaduan_m extends CI_Model
 		return $this->db->get();
 	}
 
-	public function laporan_pengaduan()
+	public function laporan_pengaduan($kategori = null)
 	{
 		$this->db->select('pengaduan.*, masyarakat.nama, masyarakat.telp, tanggapan.tgl_tanggapan, tanggapan.tanggapan, petugas.nama_petugas');
 		$this->db->from('pengaduan');
 		$this->db->join('masyarakat', 'masyarakat.nik = pengaduan.nik', 'left');
 		$this->db->join('tanggapan', 'tanggapan.id_pengaduan = pengaduan.id_pengaduan', 'left');
 		$this->db->join('petugas', 'petugas.id_petugas = tanggapan.id_petugas', 'left');
+		// $this->db->where('status', '0');
+		if ($kategori !== null) {
+			$this->db->where('jenis_pengaduan', $kategori);
+		}
+
 		return $this->db->get();
 	}
 }

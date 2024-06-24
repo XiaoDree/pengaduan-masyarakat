@@ -21,16 +21,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- <form action="<?php echo site_url('service/filter'); ?>" method="get">
-        <label for="id">Filter by Category:</label>
-        <select id="id" name="kategori">
-            <option value="">All</option>
-            <?php foreach ($kategori as $kategori) : ?>
-                <option value="<?php echo $kategori->id; ?>"><?php echo $kategori->name; ?></option>
-            <?php endforeach; ?>
-        </select>
-        <button type="submit">Filter</button>
-    </form> -->
 
 	<?php if (!empty($data_pengaduan)) : ?>
 

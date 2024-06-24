@@ -12,7 +12,10 @@ class LaporanController extends CI_Controller
 		if ($this->session->userdata('level') != 'admin') :
 			redirect('Auth/BlockedController');
 		endif;
+		$this->load->model('Tanggapan_m');
 		$this->load->model('Pengaduan_m');
+		$this->load->model('Kategori_m');
+		$this->load->model('Petugas_m');
 	}
 
 	// List all your items
@@ -20,12 +23,12 @@ class LaporanController extends CI_Controller
 	{
 		$data['title'] = 'Generate Laporan';
 		$data['laporan'] = $this->Pengaduan_m->laporan_pengaduan()->result_array();
-		// $data['kategori'] = $this->Kategori_m->get_categories();
-		// $data['data_filter'] = $this->input->get('jp');
+		$data['kategori'] = $this->Kategori_m->get_categories();
+		$data['data_filter'] = $this->input->get('jp');
 
-		// if ($this->input->get('jp') && $this->input->get('jp') !== "semua") {
-		// 	$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_by_kategori($this->input->get('jp'))->result_array();
-		// }
+		if ($this->input->get('jp') && $this->input->get('jp') !== "semua") {
+			$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_by_kategori($this->input->get('jp'))->result_array();
+		}
 
 		$this->load->view('_part/backend_head', $data);
 		$this->load->view('_part/backend_sidebar_v');

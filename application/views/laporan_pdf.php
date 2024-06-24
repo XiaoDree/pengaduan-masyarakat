@@ -24,6 +24,28 @@
 <body id="page-top">
 
   <style type="text/css">
+    body {
+      font-family: arial;
+    }
+
+    .rangkasurat {
+      width: 100%;
+      margin: 0 auto;
+      background-color: #fff;
+      height: 100px;
+      padding: 20px;
+    }
+
+    table {
+      border-bottom: 5px solid #000;
+      padding: 2px
+    }
+
+    .tengah {
+      text-align: center;
+      line-height: 5px;
+    }
+
     .table-data {
       width: 100%;
       border-collapse: collapse;
@@ -55,8 +77,19 @@
     <div class="container-fluid">
 
       <!-- Page Heading -->
-      <h1 class="h4 text-dark">Laporan Pengaduan Masyarakat</h1>
-
+      <div class="rangkasurat">
+        <table width="100%">
+          <tr>
+            <td class="tengah">
+              <h2>PEMERINTAH DAERAH PROVINSI JAWA TENGAH</h2>
+              <h2>KECAMATAN PEDAN</h2>
+              <h1>KELURAHAN SOBAYAN</h1>
+              <b>Jl. Sobayan, Polaharjo, Sobayan, Kec. Pedan, Kab. Klaten, Jawa Tengah 57468</b>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <h2 class="h4 text-dark">Laporan Pengaduan Masyarakat</h2>
       <table class="table-data">
         <thead class="thead-dark">
           <tr>

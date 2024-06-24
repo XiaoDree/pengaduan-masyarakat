@@ -1,5 +1,6 @@
 <div class="container">
-
+  <a href="<?= base_url('homepage') ?>" class="btn btn-dark"><i class="fas fa-arrow-left"></i></a>
+  <!-- <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1> -->
   <!-- Outer Row -->
   <div class="row justify-content-center">
 

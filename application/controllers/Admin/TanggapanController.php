@@ -73,7 +73,7 @@ class TanggapanController extends CI_Controller
 		$data['data_filter'] = $this->input->get('jp');
 
 		if ($this->input->get('jp') && $this->input->get('jp') !== "semua") {
-			$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_by_kategori($this->input->get('jp'))->result_array();
+			$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_by_kategori1($this->input->get('jp'))->result_array();
 		}
 
 		$this->load->view('_part/backend_head', $data);
@@ -92,7 +92,7 @@ class TanggapanController extends CI_Controller
 		$data['data_filter'] = $this->input->get('jp');
 
 		if ($this->input->get('jp') && $this->input->get('jp') !== "semua") {
-			$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_by_kategori($this->input->get('jp'))->result_array();
+			$data['data_pengaduan'] = $this->Pengaduan_m->data_pengaduan_masyarakat_selesai($this->input->get('jp'))->result_array();
 		}
 
 		$this->load->view('_part/backend_head', $data);
